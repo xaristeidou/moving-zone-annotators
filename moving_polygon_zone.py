@@ -58,6 +58,7 @@ while cap.isOpened():
         # run YOLOv8 inference on the frame
         results = model(frame)
 
+        # annotator zone starts after the first click on frame
         if start:
             # unpacking of x,y coordinates
             x,y = point
@@ -87,7 +88,6 @@ while cap.isOpened():
 
             # plot zone annotator
             zone_annotator.annotate(frame)
-
 
 
         # display the annotated frame
