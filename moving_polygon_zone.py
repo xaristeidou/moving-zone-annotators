@@ -1,6 +1,7 @@
 import supervision as sv
 import cv2
 import numpy as np
+import argparse
 from ultralytics import YOLO
 
 
@@ -16,7 +17,7 @@ def mouse_callback(event, x, y, flags, params)->None:
         start = True
         point = (x,y)
 
-def find_center_coordinates(points):
+def find_center_coordinates(points:np.ndarray)->tuple:
     '''
     Finds x,y coordinates of any given array of shape (N, >=3)
 
@@ -91,9 +92,9 @@ while cap.isOpened():
 
 
         # display the annotated frame
-        cv2.namedWindow("YOLOv8 Inference")
-        cv2.setMouseCallback("YOLOv8 Inference", mouse_callback)
-        cv2.imshow("YOLOv8 Inference", frame)
+        cv2.namedWindow("Moving polygone zone")
+        cv2.setMouseCallback("Moving polygone zone", mouse_callback)
+        cv2.imshow("Moving polygone zone", frame)
 
 
         # break the loop if 'q' is pressed
