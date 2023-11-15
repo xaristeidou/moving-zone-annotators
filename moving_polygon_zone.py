@@ -4,6 +4,36 @@ import numpy as np
 import argparse
 from ultralytics import YOLO
 
+parser = argparse.ArgumentParser(description='Moving polygone zones')
+
+# Define your command-line arguments
+parser.add_argument("--weights",
+                    type=str,
+                    help="path for yolov8 model weights",
+                    default="/home/christoforos/Documents/pytorch_files/yolov8/yolov8m.pt")
+parser.add_argument('--width', type=int, help='width of polygone zone')
+parser.add_argument('--height', type=int, help='height of polygone zone')
+
+args = parser.parse_args()
+
+
+# load the YOLOv8 model
+model = YOLO(args.weights)
+
+# open the video file
+video_path = "people_walking.mp4"
+
+cap = cv2.VideoCapture(video_path)
+
+# build corner annotator
+corner_annotator = sv.BoxCornerAnnotator(thickness=2, corner_length=10)
+
+# width and height parameters of zone
+w,h = args.width, args.height
+
+# set to False before first click assosication on frame
+start = False
+
 
 def mouse_callback(event, x, y, flags, params)->None:
     '''
@@ -33,77 +63,65 @@ def find_center_coordinates(points:np.ndarray)->tuple:
     return x_center, y_center
 
 
-# load the YOLOv8 model
-model = YOLO('/home/christoforos/Documents/pytorch_files/yolov8/yolov8m.pt')
+def main():
+    # loop through the video frames
+    while cap.isOpened():
+        # read a frame from the video
+        success, frame = cap.read()
 
-# open the video file
-video_path = "/home/christoforos/Downloads/people_walking.mp4"
-cap = cv2.VideoCapture(video_path)
+        if success:
 
-# build corner annotator
-corner_annotator = sv.BoxCornerAnnotator(thickness=2, corner_length=10)
+            # run YOLOv8 inference on the frame
+            results = model(frame)
 
-# width and height parameters of zone
-w,h = 250, 200
+            # annotator zone starts after the first click on frame
+            if start:
+                # unpacking of x,y coordinates
+                x,y = point
 
-# set to False before first click assosication on frame
-start = False
+                # building of zone annotator based on width and height parameters
+                points = np.array([[x-w, y-h],
+                                [x+w, y-h],
+                                [x+w, y+h],
+                                [x-w, y+h]])
 
-# loop through the video frames
-while cap.isOpened():
-    # read a frame from the video
-    success, frame = cap.read()
-
-    if success:
-
-        # run YOLOv8 inference on the frame
-        results = model(frame)
-
-        # annotator zone starts after the first click on frame
-        if start:
-            # unpacking of x,y coordinates
-            x,y = point
-
-            # building of zone annotator based on width and height parameters
-            points = np.array([[x-w, y-h],
-                            [x+w, y-h],
-                            [x+w, y+h],
-                            [x-w, y+h]])
-
-            # building polygone zone and annotator
-            zone = sv.PolygonZone(polygon=points,
-                                  frame_resolution_wh=(frame.shape[1], frame.shape[0]))
-            zone_annotator = sv.PolygonZoneAnnotator(zone=zone, color=sv.Color.red())
+                # building polygone zone and annotator
+                zone = sv.PolygonZone(polygon=points,
+                                    frame_resolution_wh=(frame.shape[1], frame.shape[0]))
+                zone_annotator = sv.PolygonZoneAnnotator(zone=zone, color=sv.Color.red())
 
 
+                # pass results to Detections Class and activate zone triggering
+                detections = sv.Detections.from_ultralytics(results[0])
+                mask = zone.trigger(detections=detections)
+                
+                # filter detections in polygone zone
+                detections = detections[mask]
 
-            # pass results to Detections Class and activate zone triggering
-            detections = sv.Detections.from_ultralytics(results[0])
-            mask = zone.trigger(detections=detections)
-            
-            # filter detections in polygone zone
-            detections = detections[mask]
+                # visualize the results on the frame
+                frame = corner_annotator.annotate(scene=frame.copy(), detections=detections)
 
-            # visualize the results on the frame
-            frame = corner_annotator.annotate(scene=frame.copy(), detections=detections)
-
-            # plot zone annotator
-            zone_annotator.annotate(frame)
-
-
-        # display the annotated frame
-        cv2.namedWindow("Moving polygone zone")
-        cv2.setMouseCallback("Moving polygone zone", mouse_callback)
-        cv2.imshow("Moving polygone zone", frame)
+                # plot zone annotator
+                zone_annotator.annotate(frame)
 
 
-        # break the loop if 'q' is pressed
-        if cv2.waitKey(1) & 0xFF == ord("q"):
+            # display the annotated frame
+            cv2.namedWindow("Moving polygone zone")
+            cv2.setMouseCallback("Moving polygone zone", mouse_callback)
+            cv2.imshow("Moving polygone zone", frame)
+
+
+            # break the loop if 'q' is pressed
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                break
+        else:
+            # break the loop if the end of the video is reached
             break
-    else:
-        # break the loop if the end of the video is reached
-        break
 
-# release the video capture object and close the display window
-cap.release()
-cv2.destroyAllWindows()
+    # release the video capture object and close the display window
+    cap.release()
+    cv2.destroyAllWindows()
+
+
+if __name__ == "__main__":
+    main()
