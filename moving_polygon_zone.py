@@ -33,7 +33,7 @@ video_path = "people_walking.mp4"
 cap = cv2.VideoCapture(video_path)
 
 # build corner annotator
-corner_annotator = sv.BoxCornerAnnotator(thickness=3, corner_length=12)
+corner_annotator = sv.BoxCornerAnnotator(thickness=2, corner_length=14)
 
 # set to False before first click assosication on frame
 start = False
