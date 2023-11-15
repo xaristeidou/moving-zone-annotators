@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(description='Moving polygone zones')
 parser.add_argument("--weights",
                     type=str,
                     help="path for yolov8 model weights",
-                    default="/home/christoforos/Documents/pytorch_files/yolov8/yolov8m.pt")
+                    default="yolov8m.pt")
 parser.add_argument('--polygone',
                     type=str,
                     help="path for polygone points",
