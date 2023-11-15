@@ -33,7 +33,7 @@ video_path = "people_walking.mp4"
 cap = cv2.VideoCapture(video_path)
 
 # build corner annotator
-corner_annotator = sv.BoxCornerAnnotator(thickness=2, corner_length=10)
+corner_annotator = sv.BoxCornerAnnotator(thickness=3, corner_length=12)
 
 # set to False before first click assosication on frame
 start = False
@@ -94,8 +94,10 @@ def main():
 
                 # building polygone zone and annotator
                 zone = sv.PolygonZone(polygon=points,
-                                    frame_resolution_wh=(frame.shape[1], frame.shape[0]))
-                zone_annotator = sv.PolygonZoneAnnotator(zone=zone, color=sv.Color.red())
+                                    frame_resolution_wh=(frame.shape[1], frame.shape[0]),
+                                    triggering_position=sv.Position.CENTER)
+                zone_annotator = sv.PolygonZoneAnnotator(zone=zone,
+                                                         color=sv.Color.red())
 
                 # pass results to Detections Class and activate zone triggering
                 detections = sv.Detections.from_ultralytics(results[0])
@@ -105,7 +107,8 @@ def main():
                 detections = detections[mask]
 
                 # visualize the results on the frame
-                frame = corner_annotator.annotate(scene=frame.copy(), detections=detections)
+                frame = corner_annotator.annotate(scene=frame.copy(),
+                                                  detections=detections)
 
                 # plot zone annotator
                 zone_annotator.annotate(frame)
