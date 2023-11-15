@@ -2,6 +2,7 @@ import supervision as sv
 import cv2
 import numpy as np
 import argparse
+import yaml
 from ultralytics import YOLO
 
 parser = argparse.ArgumentParser(description='Moving polygone zones')
@@ -11,10 +12,16 @@ parser.add_argument("--weights",
                     type=str,
                     help="path for yolov8 model weights",
                     default="/home/christoforos/Documents/pytorch_files/yolov8/yolov8m.pt")
-parser.add_argument('--width', type=int, help='width of polygone zone')
-parser.add_argument('--height', type=int, help='height of polygone zone')
+parser.add_argument('--polygone',
+                    type=str,
+                    help="path for polygone points",
+                    default="polygone.yaml")
 
 args = parser.parse_args()
+
+
+with open(args.polygone, 'r') as file:
+    polygone = yaml.safe_load(file)
 
 
 # load the YOLOv8 model
@@ -27,9 +34,6 @@ cap = cv2.VideoCapture(video_path)
 
 # build corner annotator
 corner_annotator = sv.BoxCornerAnnotator(thickness=2, corner_length=10)
-
-# width and height parameters of zone
-w,h = args.width, args.height
 
 # set to False before first click assosication on frame
 start = False
@@ -79,17 +83,19 @@ def main():
                 # unpacking of x,y coordinates
                 x,y = point
 
-                # building of zone annotator based on width and height parameters
-                points = np.array([[x-w, y-h],
-                                [x+w, y-h],
-                                [x+w, y+h],
-                                [x-w, y+h]])
+                # initialize an empty NumPy array and fill the points
+                points = np.empty((0, 2), dtype=int)
+                for i in polygone.values():
+                    points = np.append(points, [i], axis=0)
+
+                x_center, y_center = find_center_coordinates(points=points)
+                
+                points = points + np.array([x-x_center, y-y_center])
 
                 # building polygone zone and annotator
                 zone = sv.PolygonZone(polygon=points,
                                     frame_resolution_wh=(frame.shape[1], frame.shape[0]))
                 zone_annotator = sv.PolygonZoneAnnotator(zone=zone, color=sv.Color.red())
-
 
                 # pass results to Detections Class and activate zone triggering
                 detections = sv.Detections.from_ultralytics(results[0])
