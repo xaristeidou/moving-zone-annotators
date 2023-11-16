@@ -2,13 +2,23 @@
 **A repository that enables user to move zone annotators simply by clicking on video frame** 🌟
 
 ## 🖥️ Installation
+`git clone https://github.com/xaristeidou/moving-zone-annotators.git`
 
-### Requirements
+`cd moving-zone-annotators`
 
-### PyTorch installation
+### Libraries installation
 
-### Supervision installation
+#### PyTorch installation
+It is recommended to install PyTorch before running requirements installation, especially if you want to download PyTorch with CUDA.
+
+https://pytorch.org/get-started/locally/
+
+#### Requirements
+
+`pip install requirements.txt`
 
 
 ## 💪 Run/Execute
-`for i in range(11:)`
+`cd path_to_folder/`
+
+`python3 moving_polygone_zone.py --weights yolov8m.pt --polygone polygone.yaml`
