@@ -29,9 +29,12 @@ For Windows with latest CUDA run:
 ## 💪 Run/Execute
 `cd path_to_folder/`
 
+
 Run with default arguments:
 
 `python3 moving_polygone_zone.py`
+
+
 
 Specify arguments using parser:
 
