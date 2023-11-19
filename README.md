@@ -2,7 +2,7 @@
 **A repository that utilizes Supervision 🦊 library and enables user to move zone annotators simply by clicking on video frame** 🌟
 
 
-![Local GIF Demo](./utils/letter-a.gif)
+![Moving polygone zone](./utils/example.gif)
 
 
 ## 🖥️ Installation
@@ -69,9 +69,9 @@ https://roboflow.github.io/polygonzone/
 2) Drag and drop an image
 3) Draw the your own polygone
 4) Press Enter to close enclose the polygon
-5) Use the calculated points in yaml file
+5) Use the calculated points in yaml file <br></br>
 
-GIF with polygon from roboflow
+![Polygon zone tool roboflow](./utils/polygon_roboflow.gif)
 
 ## 🕵️ Detection model selection
 
