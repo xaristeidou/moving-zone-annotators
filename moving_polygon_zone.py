@@ -20,7 +20,7 @@ def custom_type(input:str)->Union[str,int]:
     except ValueError:
         return input
 
-parser = argparse.ArgumentParser(description='Moving polygone zones')
+parser = argparse.ArgumentParser(description='Moving polygon zones')
 
 # Define your command-line arguments
 parser.add_argument("--source",
@@ -31,15 +31,15 @@ parser.add_argument("--weights",
                     type=str,
                     help="path for yolov8 model weights",
                     default="yolov8m.pt")
-parser.add_argument('--polygone',
+parser.add_argument('--polygon',
                     type=str,
-                    help="path for polygone points",
-                    default="polygone.yaml")
+                    help="path for polygon points",
+                    default="polygon.yaml")
 
 args = parser.parse_args()
 
 
-with open(args.polygone, 'r') as file:
+with open(args.polygon, 'r') as file:
     polygone = yaml.safe_load(file)
 
 
@@ -111,7 +111,7 @@ def main():
                 
                 points = points + np.array([x-x_center, y-y_center])
 
-                # building polygone zone and annotator
+                # building polygon zone and annotator
                 zone = sv.PolygonZone(polygon=points,
                                     frame_resolution_wh=(frame.shape[1], frame.shape[0]),
                                     triggering_position=sv.Position.CENTER)
@@ -122,7 +122,7 @@ def main():
                 detections = sv.Detections.from_ultralytics(results[0])
                 mask = zone.trigger(detections=detections)
                 
-                # filter detections in polygone zone
+                # filter detections in polygon zone
                 detections = detections[mask]
 
                 # visualize the results on the frame
@@ -134,9 +134,9 @@ def main():
 
 
             # display the annotated frame
-            cv2.namedWindow("Moving polygone zone")
-            cv2.setMouseCallback("Moving polygone zone", mouse_callback)
-            cv2.imshow("Moving polygone zone", frame)
+            cv2.namedWindow("Moving polygon zone")
+            cv2.setMouseCallback("Moving polygon zone", mouse_callback)
+            cv2.imshow("Moving polygon zone", frame)
 
 
             # break the loop if 'q' is pressed
