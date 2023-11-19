@@ -91,5 +91,6 @@ For more details visit Ultralytics Models page:
 https://docs.ultralytics.com/models/ <br></br>
 
 
-💠 More models can be used but manual download and installation of packages is required. Supervision supports models like `Detectron2`, `MMDetection`, `Transformers` and more. To run such models you need to make small modifications in the code by specify in `sv.Detections.from_<inference_model>()` the model you use. What basically happens is that `Detections` class <u>will transform detection from any model results you use in a specific **unified** format</u> so you don't mess with such operations and focus on your use case only. More details can be found in Detections page of Supervision API using the following link:  
+💠 More models can be used but manual download and installation of packages is required. Supervision supports models like `Detectron2`, `MMDetection`, `Transformers` and more. To run such models you need to make small modifications in the code by specify in `sv.Detections.from_<inference_model>()` the model you use.  
+What basically happens is that `Detections` class <u>will transform detection from any model results you use in a specific **unified** format</u> so you don't mess with such operations and focus on your use case only. More details can be found in Detections page of Supervision API using the following link:  
 https://supervision.roboflow.com/detection/core/
