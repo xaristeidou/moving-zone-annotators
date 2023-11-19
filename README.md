@@ -4,7 +4,9 @@
 ## 🖥️ Installation
 `git clone https://github.com/xaristeidou/moving-zone-annotators.git`
 
-`cd moving-zone-annotators`<br></br>
+`cd moving-zone-annotators`
+
+`python3 moving_polygon_zone.py`<br></br>
 
 ### Libraries installation
 
@@ -27,7 +29,9 @@ For Windows with latest CUDA run:
 
 
 ## 💪 Run/Execute
-`cd path_to_folder/`
+Move to repository path
+
+`cd path_to_folder/`<br></br>
 
 
 Run with default arguments:
@@ -41,3 +45,23 @@ Specify arguments using parser like following:
 You can specify some of the arguments you only want to modify, for example use camera input 0:
 
 `python3 moving_polygone_zone.py --source 0`
+
+
+## █ 🖊️ Specify polygone zone
+You can specify any shape of zone you want:  
+
+🔶 Triangle (3 points)  
+🔶 Rectangle (4 points)  
+🔶 Any polygone shape with >= 5 points
+
+Open `polygone.yaml` and modify it as needed for your case in yaml format.<br></br>
+
+### Find coordinates of polygone using PolygonZone tool from Roboflow:
+
+https://roboflow.github.io/polygonzone/
+
+1) Open the above link ⬆️ 
+2) Drag and drop an image
+3) Draw the your own polygone
+4) Press Enter to close enclose the polygon
+5) Use the calculated points in yaml file
