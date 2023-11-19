@@ -13,6 +13,14 @@ It is recommended to install PyTorch before running requirements installation, e
 
 https://pytorch.org/get-started/locally/
 
+For Linux with latest CUDA run:
+
+`pip3 install torch torchvision torchaudio`
+
+For Linux with CUDA 11.8 run:
+
+`pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118`
+
 #### Requirements
 
 `pip install requirements.txt`
@@ -20,5 +28,11 @@ https://pytorch.org/get-started/locally/
 
 ## 💪 Run/Execute
 `cd path_to_folder/`
+
+Run with default arguments:
+
+`python3 moving_polygone_zone.py`
+
+Specify arguments using parser:
 
 `python3 moving_polygone_zone.py --weights yolov8m.pt --polygone polygone.yaml`
