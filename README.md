@@ -8,6 +8,10 @@
 
 `python3 moving_polygon_zone.py`<br></br>
 
+
+VIDEO WITH MOVING POLYGONS
+
+
 ### Libraries installation
 
 #### PyTorch installation (skip if installed already)
@@ -65,3 +69,24 @@ https://roboflow.github.io/polygonzone/
 3) Draw the your own polygone
 4) Press Enter to close enclose the polygon
 5) Use the calculated points in yaml file
+
+GIF with polygon from roboflow
+
+## 🕵️ Detection model selection
+
+By default **YOLOv8** model is utilized. If you don't have the model weights, these will be directly downloaded from Ultralytics API. You can specify any of `yolov8n.pt`, `yolov8s.pt`, `yolov8m.pt`, `yolov8l.pt`, `yolov8x.pt` model weights you want.
+
+Other models that can be used through Ultralytics:
+
+🔷 YOLOv3 
+🔷 YOLOv5  
+🔷 YOLOv6  
+🔷 YOLO-NAS  
+🔷 RT-DETR
+
+For more details visit Ultralytics Models page:  
+https://docs.ultralytics.com/models/ <br></br>
+
+
+💠 More models can be used but manual download and installation of packages is required. Supervision supports models like `Detectron2`, `MMDetection`, `Transformers` and more. To run such models you need to make small modifications in the code by specify in `sv.Detections.from_<inference_model>()` the model you use. More details can be found in Detections page of Supervision API using the following link:  
+https://supervision.roboflow.com/detection/core/
