@@ -2,7 +2,7 @@
 **A repository that utilizes Supervision 🦊 library and enables user to move zone annotators simply by clicking on video frame** 🌟
 
 
-![Local GIF Demo](./letter-a.gif)
+![Local GIF Demo](./utils/letter-a.gif)
 
 
 ## 🖥️ Installation
