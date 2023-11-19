@@ -1,15 +1,16 @@
 # 🚀 Moving Zone Annotators
 **A repository that utilizes Supervision 🦊 library and enables user to move zone annotators simply by clicking on video frame** 🌟
 
+
+![Local GIF Demo](./letter-a.gif)
+
+
 ## 🖥️ Installation
 `git clone https://github.com/xaristeidou/moving-zone-annotators.git`
 
 `cd moving-zone-annotators`
 
 `python3 moving_polygon_zone.py`<br></br>
-
-
-VIDEO WITH MOVING POLYGONS
 
 
 ### Libraries installation
@@ -78,15 +79,17 @@ By default **YOLOv8** model is utilized. If you don't have the model weights, th
 
 Other models that can be used through Ultralytics:
 
-🔷 YOLOv3 
+🔷 YOLOv3  
 🔷 YOLOv5  
 🔷 YOLOv6  
 🔷 YOLO-NAS  
 🔷 RT-DETR
 
+<u>Note:</u> Small modificationas may needed deepending in the model selection. All YOLO models (except YOLO-NAS) used by Ultalytics run through YOLO class. Otherwise for NAS and RT-DETR you need to modify and import each Class respectively. 
+
 For more details visit Ultralytics Models page:  
 https://docs.ultralytics.com/models/ <br></br>
 
 
-💠 More models can be used but manual download and installation of packages is required. Supervision supports models like `Detectron2`, `MMDetection`, `Transformers` and more. To run such models you need to make small modifications in the code by specify in `sv.Detections.from_<inference_model>()` the model you use. More details can be found in Detections page of Supervision API using the following link:  
+💠 More models can be used but manual download and installation of packages is required. Supervision supports models like `Detectron2`, `MMDetection`, `Transformers` and more. To run such models you need to make small modifications in the code by specify in `sv.Detections.from_<inference_model>()` the model you use. What basically happens is that `Detections` class <u>will transform detection from any model results you use in a specific **unified** format</u> so you don't mess with such operations and focus on your use case only. More details can be found in Detections page of Supervision API using the following link:  
 https://supervision.roboflow.com/detection/core/
