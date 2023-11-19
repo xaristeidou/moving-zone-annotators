@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser(description='Moving polygon zones')
 parser.add_argument("--source",
                     type=custom_type,
                     help="define the video source",
-                    default="people_walking.mp4")
+                    default="utils/people_walking.mp4")
 parser.add_argument("--weights",
                     type=str,
                     help="path for yolov8 model weights",
