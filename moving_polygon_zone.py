@@ -4,14 +4,16 @@ import numpy as np
 import argparse
 import yaml
 from ultralytics import YOLO
+from typing import Union
 
-def custom_type(input):
+def custom_type(input:str)->Union[str,int]:
     '''
     Check if user provided number for camera input
 
     -Args:
-        value
+        input (str): User input for video source
     -Return:
+        input (str | int): Returns integer if provided for camera source, otherwise video name
     '''
     try:
         return int(input)
