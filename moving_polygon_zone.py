@@ -5,9 +5,26 @@ import argparse
 import yaml
 from ultralytics import YOLO
 
+def custom_type(input):
+    '''
+    Check if user provided number for camera input
+
+    -Args:
+        value
+    -Return:
+    '''
+    try:
+        return int(input)
+    except ValueError:
+        return input
+
 parser = argparse.ArgumentParser(description='Moving polygone zones')
 
 # Define your command-line arguments
+parser.add_argument("--source",
+                    type=custom_type,
+                    help="define the video source",
+                    default="people_walking.mp4")
 parser.add_argument("--weights",
                     type=str,
                     help="path for yolov8 model weights",
@@ -28,7 +45,7 @@ with open(args.polygone, 'r') as file:
 model = YOLO(args.weights)
 
 # open the video file
-video_path = "people_walking.mp4"
+video_path = args.source
 
 cap = cv2.VideoCapture(video_path)
 
