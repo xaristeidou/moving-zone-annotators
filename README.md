@@ -1,5 +1,5 @@
 # 🚀 Moving Zone Annotators
-**A repository that enables user to move zone annotators simply by clicking on video frame** 🌟
+**A repository that utilizes Supervision 🦊 library and enables user to move zone annotators simply by clicking on video frame** 🌟
 
 ## 🖥️ Installation
 `git clone https://github.com/xaristeidou/moving-zone-annotators.git`
@@ -8,7 +8,7 @@
 
 ### Libraries installation
 
-#### PyTorch installation
+#### PyTorch installation (skip if installed already)
 It is recommended to install PyTorch before running requirements installation, especially if you want to download PyTorch with CUDA.
 
 https://pytorch.org/get-started/locally/
@@ -17,9 +17,9 @@ For Linux with latest CUDA run:
 
 `pip3 install torch torchvision torchaudio`
 
-For Linux with CUDA 11.8 run:
+For Windows with latest CUDA run:
 
-`pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118`
+`pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121`
 
 #### Requirements
 
@@ -35,4 +35,4 @@ Run with default arguments:
 
 Specify arguments using parser:
 
-`python3 moving_polygone_zone.py --weights yolov8m.pt --polygone polygone.yaml`
+`python3 moving_polygone_zone.py --source people_walking.mp4 --weights yolov8m.pt --polygone polygone.yaml`
