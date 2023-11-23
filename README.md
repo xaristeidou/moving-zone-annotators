@@ -30,7 +30,11 @@ For Windows with latest CUDA run:
 
 #### Requirements
 
-`pip install requirements.txt`<br></br>
+`pip install ultralytics`  
+`pip install supervision --no-deps`
+
+<u>Note:</u> Supervision installation for some reason will install opencv-python-headless, which not support GUI, even when pip install supervision[desktop]. If you get any error from opencv package after installing supervision library, just uninstall opencv and re-install it.
+<br></br>
 
 
 ## 💪 Run/Execute
