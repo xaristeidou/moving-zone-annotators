@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# PyTorch weights
+*.pt
+
 # Distribution / packaging
 .Python
 build/
