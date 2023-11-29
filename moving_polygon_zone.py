@@ -47,13 +47,20 @@ with open(args.polygon, 'r') as file:
 model = YOLO(args.weights)
 
 
-class MovingZoneAnnotator():
-    def __init__(self, model):
-        self.video_path = args.source
+class MovingZoneAnnotator:
+    def __init__(self,
+                 model = model,
+                 video_source = args.source,
+                 annotator = sv.BoxCornerAnnotator(thickness=2, corner_length=14),
+                 start = False,
+                 cap = cv2.VideoCapture(args.source)
+                 ):
+        
         self.model = model
-        self.annotator = sv.BoxCornerAnnotator(thickness=2, corner_length=14)
-        self.start = False
-        self.cap = cv2.VideoCapture(self.video_path)
+        self.video_source = video_source
+        self.annotator = annotator
+        self.start = start
+        self.cap = cap
 
 
     def mouse_callback(self, event, x, y, flags, params)->None:
@@ -146,4 +153,4 @@ class MovingZoneAnnotator():
 
 
 if __name__ == "__main__":
-    MovingZoneAnnotator(model=model).main()
+    MovingZoneAnnotator().main()
