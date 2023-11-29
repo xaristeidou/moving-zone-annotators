@@ -2,7 +2,7 @@
 **A repository that utilizes Supervision 🦊 library and enables user to move zone annotators simply by clicking on video frame** 🌟
 
 
-![Moving polygone zone](./utils/example.gif)
+![Moving polygone zone](./assets/example.gif)
 
 
 ## 🖥️ Installation
