@@ -8,11 +8,6 @@
 ## 🖥️ Installation
 `git clone https://github.com/xaristeidou/moving-zone-annotators.git`
 
-`cd moving-zone-annotators`
-
-`python3 moving_polygon_zone.py`<br></br>
-
-
 ### Libraries installation
 
 #### PyTorch installation (skip if installed already)
