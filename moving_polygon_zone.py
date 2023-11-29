@@ -87,7 +87,7 @@ class MovingZoneAnnotator:
         y_center = int(np.mean(points[:, 1]))
         return x_center, y_center
 
-    def main(self):
+    def predict(self):
         # loop through the video frames
         while self.cap.isOpened():
             # read a frame from the video
@@ -153,4 +153,4 @@ class MovingZoneAnnotator:
 
 
 if __name__ == "__main__":
-    MovingZoneAnnotator().main()
+    MovingZoneAnnotator().predict()
