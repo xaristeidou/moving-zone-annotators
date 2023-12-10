@@ -66,11 +66,9 @@ class MovingZoneAnnotator:
         if event == cv2.EVENT_LBUTTONDOWN and not self.zone_completed:
             self.start = True
             self.points.append([x,y])
-
-        # check for Enter key press
-        elif event == cv2.EVENT_KEYDOWN and chr(flags & 255) == '\r':
-            self.zone_completed = True
-
+            self.point = x,y
+        elif event == cv2.EVENT_LBUTTONDOWN:
+            self.point = x,y
 
     def find_center_coordinates(self, points:np.ndarray)->Tuple[int, int]:
         '''
@@ -99,13 +97,13 @@ class MovingZoneAnnotator:
                 results = model(frame)
 
                 # annotator zone starts after the first click on frame
-                if self.start:
+                if self.zone_completed:
                     # unpacking of x,y coordinates
                     x,y = self.point
 
                     # initialize an empty NumPy array and fill the points
                     points = np.empty((0, 2), dtype=int)
-                    for i in polygone.values():
+                    for i in self.points:
                         points = np.append(points, [i], axis=0)
 
                     x_center, y_center = self.find_center_coordinates(points=points)
@@ -134,6 +132,14 @@ class MovingZoneAnnotator:
                     zone_annotator.annotate(frame)
 
 
+                if not self.zone_completed:
+                    for circle in self.points:
+                        cv2.circle(img=frame,
+                                   center=tuple(circle),
+                                   radius=5,
+                                   color=(0,0,255),
+                                   thickness=-1)
+
                 # display the annotated frame
                 cv2.namedWindow("Moving polygon zone")
                 cv2.setMouseCallback("Moving polygon zone", self.mouse_callback)
@@ -141,8 +147,11 @@ class MovingZoneAnnotator:
 
 
                 # break the loop if 'q' is pressed
-                if cv2.waitKey(1) & 0xFF == ord("q"):
+                key = cv2.waitKey(1)
+                if key == 113:
                     break
+                elif key == 13:
+                    self.zone_completed = True
             else:
                 # break the loop if the end of the video is reached
                 break
