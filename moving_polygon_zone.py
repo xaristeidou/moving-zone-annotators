@@ -164,6 +164,10 @@ class MovingZoneAnnotator:
                     break
                 elif key == 13:
                     self.zone_completed = True
+                    points = np.empty((0, 2), dtype=int)
+                    for i in self.points:
+                        points = np.append(points, [i], axis=0)
+                    self.point = self.find_center_coordinates(points=points)
             else:
                 # break the loop if the end of the video is reached
                 break
