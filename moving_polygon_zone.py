@@ -136,7 +136,7 @@ class MovingZoneAnnotator:
                     for circle in self.points:
                         cv2.circle(img=frame,
                                    center=tuple(circle),
-                                   radius=5,
+                                   radius=8,
                                    color=(0,0,255),
                                    thickness=-1)
 
