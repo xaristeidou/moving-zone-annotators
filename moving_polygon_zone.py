@@ -158,10 +158,13 @@ class MovingZoneAnnotator:
                 cv2.imshow("Moving polygon zone", frame)
 
 
-                # break the loop if 'q' is pressed
+                # capture keys
                 key = cv2.waitKey(1)
+
+                # stop if key is 'q'
                 if key == 113:
                     break
+                # complete polygon if key is 'Enter'
                 elif key == 13:
                     self.zone_completed = True
                     points = np.empty((0, 2), dtype=int)
