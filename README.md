@@ -62,7 +62,7 @@ You can specify any shape of zone you want:
 
 1) Use your mouse (left-click) to select the points for the polygon zone.
 2) For each point a circle will be draw on frame for better visualization.
-3) Once you select the positions of all points press "Enter" button.
+3) Once you select the positions of all points press `"Enter"` button.
 4) The polygon zone will be enclosed and draw on frame.
 5) Use your mouse to move polygon zone wherever you want. 😊 <br></br>
 
