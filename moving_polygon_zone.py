@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import argparse
 from ultralytics import YOLO
-from typing import Union
+from typing import Union, Tuple
 
 def custom_type(input:str)->Union[str,int]:
     '''
@@ -65,7 +65,7 @@ class MovingZoneAnnotator:
             self.start = True
             self.point = (x,y)
 
-    def find_center_coordinates(self, points:np.ndarray)->tuple:
+    def find_center_coordinates(self, points:np.ndarray)->Tuple[int, int]:
         '''
         Finds x,y coordinates of any given array of shape (N, >=3)
 
