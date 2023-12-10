@@ -31,16 +31,10 @@ parser.add_argument("--weights",
                     type=str,
                     help="path for yolov8 model weights",
                     default="yolov8m.pt")
-parser.add_argument('--polygon',
-                    type=str,
-                    help="path for polygon points",
-                    default="polygon.yaml")
+
 
 args = parser.parse_args()
 
-
-with open(args.polygon, 'r') as file:
-    polygone = yaml.safe_load(file)
 
 
 # load the YOLOv8 model
