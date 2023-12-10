@@ -65,7 +65,7 @@ class MovingZoneAnnotator:
         # assign left-click down button as event
         if event == cv2.EVENT_LBUTTONDOWN and not self.zone_completed:
             self.start = True
-            self.points.append((x,y))
+            self.points.append([x,y])
 
         # check for Enter key press
         elif event == cv2.EVENT_KEYDOWN and chr(flags & 255) == '\r':
