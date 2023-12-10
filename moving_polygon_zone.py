@@ -41,18 +41,20 @@ model = YOLO(args.weights)
 
 
 class MovingZoneAnnotator:
+    zone_completed = False
+    points = []
+    start = False
+
     def __init__(self,
                  model = model,
                  video_source = args.source,
                  annotator = sv.BoxCornerAnnotator(thickness=2, corner_length=14),
-                 start = False,
-                 cap = cv2.VideoCapture(args.source)
+                 cap = cv2.VideoCapture(args.source),
                  ):
         
         self.model = model
         self.video_source = video_source
         self.annotator = annotator
-        self.start = start
         self.cap = cap
 
 
@@ -61,9 +63,14 @@ class MovingZoneAnnotator:
         Mouse callback function based on OpenCV functionalities
         '''
         # assign left-click down button as event
-        if event == cv2.EVENT_LBUTTONDOWN:
+        if event == cv2.EVENT_LBUTTONDOWN and not self.zone_completed:
             self.start = True
-            self.point = (x,y)
+            self.points.append((x,y))
+
+        # check for Enter key press
+        elif event == cv2.EVENT_KEYDOWN and chr(flags & 255) == '\r':
+            self.zone_completed = True
+
 
     def find_center_coordinates(self, points:np.ndarray)->Tuple[int, int]:
         '''
