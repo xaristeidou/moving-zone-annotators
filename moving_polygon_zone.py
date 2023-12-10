@@ -62,12 +62,24 @@ class MovingZoneAnnotator:
         '''
         Mouse callback function based on OpenCV functionalities
         '''
-        # assign left-click down button as event
+        # capture point to draw the polygon
         if event == cv2.EVENT_LBUTTONDOWN and not self.zone_completed:
             self.start = True
             self.points.append([x,y])
             self.point = x,y
+        
+        # capture left click to move the polygon
         elif event == cv2.EVENT_LBUTTONDOWN:
+            self.moving = True
+        
+        # capture mouse move for moving the polygon
+        elif event == cv2.EVENT_MOUSEMOVE:
+            if self.moving:
+                self.point = x,y
+
+        # capture left click release to stop moving the polygon
+        elif event == cv2.EVENT_LBUTTONUP:
+            self.moving = False
             self.point = x,y
 
     def find_center_coordinates(self, points:np.ndarray)->Tuple[int, int]:
