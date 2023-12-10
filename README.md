@@ -70,7 +70,7 @@ https://roboflow.github.io/polygonzone/
 4) Press Enter to close enclose the polygon
 5) Use the calculated points in yaml file <br></br>
 
-![Polygon zone tool roboflow](./utils/polygon_roboflow.gif)
+![Polygon zone tool roboflow](./assets/polygon_roboflow.gif)
 
 ## 🕵️ Detection model selection
 
