@@ -44,7 +44,7 @@ Run with default arguments:
 
 Specify arguments using parser like following:
 
-`python3 moving_polygone_zone.py --source people_walking.mp4 --weights yolov8m.pt --polygone polygone.yaml`<br></br>
+`python3 moving_polygone_zone.py --source people_walking.mp4 --weights yolov8m.pt`<br></br>
 
 You can specify some of the arguments you only want to modify, for example use camera input 0:
 
@@ -58,19 +58,14 @@ You can specify any shape of zone you want:
 🔶 Rectangle (4 points)  
 🔶 Any polygone shape with >= 5 points
 
-Open `polygone.yaml` and modify it as needed for your case in yaml format.<br></br>
 
-### Find coordinates of polygone using PolygonZone tool from Roboflow:
 
-https://roboflow.github.io/polygonzone/
+1) Use your mouse (left-click) to select the points for the polygon zone.
+2) For each point a circle will be draw on frame for better visualization.
+3) Once you select the positions of all points press `"Enter"` button.
+4) The polygon zone will be enclosed and draw on frame.
+5) Use your mouse to move polygon zone wherever you want. 😊 <br></br>
 
-1) Open the above link ⬆️ 
-2) Drag and drop an image
-3) Draw the your own polygone
-4) Press Enter to close enclose the polygon
-5) Use the calculated points in yaml file <br></br>
-
-![Polygon zone tool roboflow](./utils/polygon_roboflow.gif)
 
 ## 🕵️ Detection model selection
 
